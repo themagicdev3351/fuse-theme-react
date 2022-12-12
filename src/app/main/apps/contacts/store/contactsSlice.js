@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getUserData } from './userSlice';
-import FuseUtils from '@fuse/utils';
-
 
 export const getContacts = createAsyncThunk(
   'contactsApp/contacts/getContacts',
@@ -20,17 +18,11 @@ export const getContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contactsApp/contacts/addContact',
   async (contact, { dispatch, getState }) => {
-    debugger
-    const response = await axios.post('/api/contacts-app/contacts', contact);
+    const response = await axios.post('/api/contacts-app/add-contact', { contact });
     const data = await response.data;
 
     dispatch(getContacts());
-    const newContact = {
-      ...contact,
-      id: data.id
-    };
-    const getContact = await axios.get('/api/contacts-app/contacts');
-    getContact.contacts = [...getContact.data, newContact];
+
     return data;
   }
 );
@@ -38,21 +30,10 @@ export const addContact = createAsyncThunk(
 export const updateContact = createAsyncThunk(
   'contactsApp/contacts/updateContact',
   async (contact, { dispatch, getState }) => {
-    debugger
-    const response = await axios.put(`/api/contacts-app/contacts/${contact.id}`, contact);
-    console.log(response, contact.id)
+    const response = await axios.post('/api/contacts-app/update-contact', { contact });
     const data = await response.data;
 
     dispatch(getContacts());
-
-    const getContact = await axios.get('/api/contacts-app/contacts');
-
-    getContact.data = getContact.data.map(checkId => {
-      if (contact.id === checkId.id) {
-        return contact;
-      }
-      return checkId;
-    });
 
     return data;
   }
@@ -61,12 +42,8 @@ export const updateContact = createAsyncThunk(
 export const removeContact = createAsyncThunk(
   'contactsApp/contacts/removeContact',
   async (contactId, { dispatch, getState }) => {
-    debugger
-    await axios.delete(`/api/contacts-app/contacts/${contactId}`, { contactId });
+    await axios.post('/api/contacts-app/remove-contact', { contactId });
 
-    const getContact = await axios.get('/api/contacts-app/contacts');
-    getContact.data = getContact.data.filter(contact => contactId !== contact.id);
-    dispatch(getContacts());
     return contactId;
   }
 );
@@ -74,14 +51,7 @@ export const removeContact = createAsyncThunk(
 export const removeContacts = createAsyncThunk(
   'contactsApp/contacts/removeContacts',
   async (contactIds, { dispatch, getState }) => {
-    debugger  
-
-    await contactIds.map((id, index) => {
-      axios.delete(`/api/contacts-app/contacts/${index}`, { contactIds });
-    })
-
-    const getContact = await axios.get('/api/contacts-app/contacts');
-    getContact.data = getContact.data.filter(contact => !contactIds.includes(contact.id));
+    await axios.post('/api/contacts-app/remove-contacts', { contactIds });
 
     return contactIds;
   }

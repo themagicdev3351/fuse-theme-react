@@ -408,65 +408,64 @@ const contactsDB = {
 	]
 };
 
-// mock.onGet('/api/contacts-app/contacts').reply(config => {
-// 	const { id } = config.params;
-// 	let response = [];
-// 	switch (id) {
-// 		case 'frequent': {
-// 			response = contactsDB.contacts.filter(contact => contactsDB.user[0].frequentContacts.includes(contact.id));
-// 			break;
-// 		}
-// 		case 'starred': {
-// 			response = contactsDB.contacts.filter(contact => contactsDB.user[0].starred.includes(contact.id));
-// 			break;
-// 		}
-// 		default: {
-// 			response = contactsDB.contacts;
-// 		}
-// 	}
-// 	return [200, response];
-// });
+mock.onGet('/api/contacts-app/contacts').reply(config => {
+	const { id } = config.params;
+	let response = [];
+	switch (id) {
+		case 'frequent': {
+			response = contactsDB.contacts.filter(contact => contactsDB.user[0].frequentContacts.includes(contact.id));
+			break;
+		}
+		case 'starred': {
+			response = contactsDB.contacts.filter(contact => contactsDB.user[0].starred.includes(contact.id));
+			break;
+		}
+		default: {
+			response = contactsDB.contacts;
+		}
+	}
+	return [200, response];
+});
 
-// mock.onGet('/api/contacts-app/user').reply(config => {
-// 	return [200, contactsDB.user[0]];
-// });
+mock.onGet('/api/contacts-app/user').reply(config => {
+	return [200, contactsDB.user[0]];
+});
 
-// mock.onPost('/api/contacts-app/add-contact').reply(request => {
-// 	debugger
-// 	const { contact } = JSON.parse(request.data);
-// 	const newContact = {
-// 		...contact,
-// 		id: FuseUtils.generateGUID()
-// 	};
-// 	contactsDB.contacts = [...contactsDB.contacts, newContact];
-// 	return [200, newContact];
-// });
+mock.onPost('/api/contacts-app/add-contact').reply(request => {
+	const { contact } = JSON.parse(request.data);
+	const newContact = {
+		...contact,
+		id: FuseUtils.generateGUID()
+	};
+	contactsDB.contacts = [...contactsDB.contacts, newContact];
+	return [200, newContact];
+});
 
-// mock.onPost('/api/contacts-app/update-contact').reply(request => {
-// 	const { contact } = JSON.parse(request.data);
+mock.onPost('/api/contacts-app/update-contact').reply(request => {
+	const { contact } = JSON.parse(request.data);
 
-// 	contactsDB.contacts = contactsDB.contacts.map(_contact => {
-// 		if (contact.id === _contact.id) {
-// 			return contact;
-// 		}
-// 		return _contact;
-// 	});
+	contactsDB.contacts = contactsDB.contacts.map(_contact => {
+		if (contact.id === _contact.id) {
+			return contact;
+		}
+		return _contact;
+	});
 
-// 	return [200, contact];
-// });
+	return [200, contact];
+});
 
-// mock.onPost('/api/contacts-app/remove-contact').reply(request => {
-// 	const { contactId } = JSON.parse(request.data);
-// 	contactsDB.contacts = contactsDB.contacts.filter(contact => contactId !== contact.id);
+mock.onPost('/api/contacts-app/remove-contact').reply(request => {
+	const { contactId } = JSON.parse(request.data);
+	contactsDB.contacts = contactsDB.contacts.filter(contact => contactId !== contact.id);
 
-// 	return [200, contactId];
-// });
+	return [200, contactId];
+});
 
-// mock.onPost('/api/contacts-app/remove-contacts').reply(request => {
-// 	const { contactIds } = JSON.parse(request.data);
-// 	contactsDB.contacts = contactsDB.contacts.filter(contact => !contactIds.includes(contact.id));
-// 	return [200, contactIds];
-// });
+mock.onPost('/api/contacts-app/remove-contacts').reply(request => {
+	const { contactIds } = JSON.parse(request.data);
+	contactsDB.contacts = contactsDB.contacts.filter(contact => !contactIds.includes(contact.id));
+	return [200, contactIds];
+});
 
 mock.onPost('/api/contacts-app/toggle-starred-contact').reply(request => {
 	const { contactId } = JSON.parse(request.data);

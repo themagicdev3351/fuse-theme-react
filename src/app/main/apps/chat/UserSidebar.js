@@ -41,7 +41,7 @@ const statusArr = [
 
 function UserSidebar(props) {
   const dispatch = useDispatch();
-  const user = useSelector(({ auth }) => auth.user);
+  const user = useSelector(({ chatApp }) => chatApp.user);
   const { control, handleSubmit, watch } = useForm({ defaultValues: user });
   const form = watch();
 
@@ -71,11 +71,11 @@ function UserSidebar(props) {
           </IconButton>
         </Toolbar>
         <Toolbar className="flex flex-col justify-center items-center p-24">
-          <Avatar src={user.data.avatar} alt={user.data.name} className="w-96 h-96">
-            {!user.data.avatar || user.data.avatar === '' ? user.data.name : ''}
+          <Avatar src={user.avatar} alt={user.name} className="w-96 h-96">
+            {!user.avatar || user.avatar === '' ? user.name[0] : ''}
           </Avatar>
           <Typography color="inherit" className="mt-16" variant="h6">
-            {user.data.name}
+            {user.name}
           </Typography>
         </Toolbar>
       </AppBar>

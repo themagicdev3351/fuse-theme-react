@@ -35,7 +35,7 @@ function ContactSidebar(props) {
 
         <Toolbar className="flex flex-col justify-center items-center p-24">
           <Avatar src={contact.avatar} alt={contact.name} className="w-96 h-96">
-            {!contact.avatar || contact.avatar === '' ? contact.name : ''}
+            {!contact.avatar || contact.avatar === '' ? contact.name[0] : ''}
           </Avatar>
           <Typography color="inherit" className="mt-16" variant="h6">
             {contact.name}

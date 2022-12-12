@@ -27,36 +27,6 @@ axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencod
 
 
 const App = () => {
-  // debugger
-  const dispatch = useDispatch();
-  const usersa = useSelector(({ auth }) => auth.users);
-
-
-  const [userAll, setUserAll] = useState([]);
-  const printUsers = async () => {
-    var getusers = await FirebaseService.db.ref('/users/');
-    getusers.on('value', (snapshot) => {
-      let newUsers = []
-      snapshot.forEach((user) => {
-        FirebaseService.db.ref('/users/' + user.key).on('value', (snapshot) => {
-          var users = snapshot.val()
-          if (users) {
-            newUsers.push(users);
-            // console.log(newUsers)
-          }
-        })
-      })
-      setUserAll(newUsers);
-    })
-  }
-  useEffect(() => {
-    printUsers();
-  }, [])
-
-  if (userAll) {
-    dispatch(users(userAll))
-  }
- 
 
   return (
     <Auth>

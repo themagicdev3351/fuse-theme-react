@@ -18,11 +18,8 @@ function ContactsApp(props) {
   const pageLayout = useRef(null);
   const routeParams = useParams();
 
-
   useDeepCompareEffect(() => {
-    useEffect(() => {
-      dispatch(getContacts(routeParams));
-    }, []);
+    dispatch(getContacts(routeParams));
     dispatch(getUserData());
   }, [dispatch, routeParams]);
 
