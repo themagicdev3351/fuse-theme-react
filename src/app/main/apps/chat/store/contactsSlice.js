@@ -1,30 +1,13 @@
 import { createEntityAdapter, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import axios from 'axios';
 
-export const getContacts = createAsyncThunk('chatApp/contacts/getContacts', async (_, { getState }) => {
-  debugger
-  const user = await getState().auth.users;
-  // const data = await user;
+export const getContacts = createAsyncThunk('chatApp/contacts/getContacts', async (params) => {
+  const response = await axios.get('/api/chat/contacts', { params });
+  const data = await response.data;
 
-  // const response = await axios.get('/api/chat/contacts', { params });
-  // const data = await response.data;
-  const contactData = [];
-
-  await user.map(item => {
-    return contactData.push({
-      id: item.id,
-      name: item.data.name,
-      avatar: item.data.avatar,
-      status: item.status,
-      mood: item.mood,
-      unread: item.unread
-    })
-  })
-
-  return contactData;
-
+  return data;
 });
-
 
 const contactsAdapter = createEntityAdapter({});
 

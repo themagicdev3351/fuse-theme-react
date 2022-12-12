@@ -47,15 +47,7 @@ const statusArr = [
 function ChatsSidebar(props) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const userasd = useSelector(({ auth }) => auth.user);
-  const user = [{
-    id: userasd.id,
-    name: userasd.data.name,
-    avatar: userasd.data.avatar,
-    status: userasd.status,
-    mood: userasd.mood,
-    chatList: [userasd.chatList]
-  }]
+  const user = useSelector(({ chatApp }) => chatApp.user);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -112,7 +104,7 @@ function ChatsSidebar(props) {
               tabIndex={0}
             >
               <Avatar src={user.avatar} alt={user.name} className="w-40 h-40">
-                {!user.avatar || user.avatar === '' ? user.name : ''}
+                {!user.avatar || user.avatar === '' ? user.name[0] : ''}
               </Avatar>
               <div
                 className="absolute right-0 bottom-0 -m-4 z-10 cursor-pointer"
@@ -203,15 +195,12 @@ function ChatsSidebar(props) {
             const chatListContacts =
               contacts.length > 0 && user && user.chatList
                 ? user.chatList.map((_chat) => ({
-                  ..._chat,
-                  ...contacts.find((_contact) => _contact.id === _chat.contactId),
-                }))
+                    ..._chat,
+                    ...contacts.find((_contact) => _contact.id === _chat.contactId),
+                  }))
                 : [];
             const filteredContacts = getFilteredArray([...contacts], searchText);
             const filteredChatList = getFilteredArray([...chatListContacts], searchText);
-
-            console.log(filteredContacts)
-            console.log(filteredChatList)
 
             const container = {
               show: {

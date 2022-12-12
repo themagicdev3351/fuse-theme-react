@@ -36,7 +36,7 @@ function ContactListItem(props) {
         </div>
 
         <Avatar src={props.contact.avatar} alt={props.contact.name}>
-          {!props.contact.avatar || props.contact.avatar === '' ? props.contact.name : ''}
+          {!props.contact.avatar || props.contact.avatar === '' ? props.contact.name[0] : ''}
         </Avatar>
       </div>
 

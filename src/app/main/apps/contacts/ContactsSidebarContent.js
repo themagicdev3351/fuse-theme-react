@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ContactsSidebarContent(props) {
-  const user = useSelector(({ auth }) => auth.user); 
+  const user = useSelector(({ contactsApp }) => contactsApp.user);
+
   const dispatch = useDispatch();
 
   const classes = useStyles(props);
@@ -57,8 +58,8 @@ function ContactsSidebarContent(props) {
         className="rounded-0 shadow-none lg:rounded-16 lg:shadow"
       >
         <div className="p-24 flex items-center">
-          <Avatar alt={user.name} src={user.data.photoURL} />
-          <Typography className="mx-12">{user.data.displayName}</Typography>
+          <Avatar alt={user.name} src={user.avatar} />
+          <Typography className="mx-12">{user.name}</Typography>
         </div>
 
         <Divider />

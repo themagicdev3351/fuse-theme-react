@@ -7,40 +7,24 @@ import { updateUserChatList } from './userSlice';
 export const getChat = createAsyncThunk(
   'chatApp/chat/getChat',
   async ({ contactId, isMobile }, { dispatch, getState }) => {
-    debugger
-    // const { uid: userId } = getState().auth.user;
-    const { id: userId } = getState().auth.user;
-    const users = getState().auth.users;
+    const { id: userId } = getState().chatApp.user;
 
-    // const response = await axios.get('/api/chat/get-chat', {
-    //   params: {
-    //     contactId,
-    //     userId,
-    //   },
-    // });
-    // const { chat, userChatList } = await response.data;
-
-    const user = users.find(_user => _user.id === userId);
-
-    const chatList = users.map((item, index) => {
-      return item.chatList
-    })
-
-    const userChat = chatList.find(_chat => _chat.contactId === contactId);
-    const chatId = userChat ? userChat.chatId : createNewChat(contactId, userId);
-
-
+    const response = await axios.get('/api/chat/get-chat', {
+      params: {
+        contactId,
+        userId,
+      },
+    });
+    const { chat, userChatList } = await response.data;
 
     dispatch(setSelectedContactId(contactId));
-    dispatch(updateUserChatList(user.chatList));
+    dispatch(updateUserChatList(userChatList));
 
     if (isMobile) {
       dispatch(closeMobileChatsSidebar());
     }
 
-    return user.chats.find(_chat => _chat.id === chatId)
-
-    // return chat;
+    return chat;
   }
 );
 

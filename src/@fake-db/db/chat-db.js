@@ -367,7 +367,6 @@ mock.onGet('/api/chat/user').reply(config => {
 });
 
 mock.onPost('/api/chat/user/data').reply(request => {
-	debugger
 	const data = JSON.parse(request.data);
 	chatDb.user[0] = _.merge({}, chatDb.user[0], data);
 	return [200, chatDb.user[0]];
