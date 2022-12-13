@@ -40,6 +40,8 @@ export const registerWithFirebase = (model) => async (dispatch) => {
         })
       );
 
+      
+
       return dispatch(registerSuccess());
     })
     .catch((error) => {

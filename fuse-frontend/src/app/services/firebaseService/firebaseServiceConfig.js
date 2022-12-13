@@ -1,12 +1,12 @@
 const prodConfig = {
-  apiKey: "AIzaSyA2zoq6hh9IeEdQ-vhm_hH4KyQ5woif3aY",
-  authDomain: "react-fuse-theme.firebaseapp.com",
-  projectId: "react-fuse-theme",
-  storageBucket: "react-fuse-theme.appspot.com",
-  messagingSenderId: "44678101687",
-  appId: "1:44678101687:web:350325fae2f46b92cf6b32",
-  measusrementId: "G-P1GWY7G0J0",
-  databaseURL: "https://react-fuse-theme-default-rtdb.firebaseio.com/",
+  apiKey: "AIzaSyBgE_E4jlj4XtL9l5xxFFhKcOGuPx4o9yk",
+  authDomain: "fuse-theme-new.firebaseapp.com",
+  databaseURL: "https://fuse-theme-new-default-rtdb.firebaseio.com",
+  projectId: "fuse-theme-new",
+  storageBucket: "fuse-theme-new.appspot.com",
+  messagingSenderId: "908265895240",
+  appId: "1:908265895240:web:eb9a875cd00b9c8ca76f7d",
+  measurementId: "G-3Y1QBZE4BK"
 };
 
 const devConfig = {

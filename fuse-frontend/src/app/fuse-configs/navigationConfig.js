@@ -100,19 +100,19 @@ const navigationConfig = [
       // //   icon: 'school',
       // //   url: '/apps/academy',
       // // },
-      // {
-      //   id: 'mail',
-      //   title: 'Mail',
-      //   translate: 'MAIL',
-      //   type: 'item',
-      //   icon: 'email',
-      //   url: '/apps/mail',
-      //   badge: {
-      //     title: 25,
-      //     bg: '#F44336',
-      //     fg: '#FFFFFF',
-      //   },
-      // },
+      {
+        id: 'mail',
+        title: 'Mail',
+        translate: 'MAIL',
+        type: 'item',
+        icon: 'email',
+        url: '/apps/mail',
+        badge: {
+          title: 25,
+          bg: '#F44336',
+          fg: '#FFFFFF',
+        },
+      },
       // {
       //   id: 'todo',
       //   title: 'To-Do',
